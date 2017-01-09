@@ -78,10 +78,31 @@ var Engine = (function(global) {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
+
+     function checkCollisions(){
+         var playerX = this.x;
+         var playerY = this.y;
+
+         //If the player has the same Y value and is within 50px of the Enemy's x-coordinate, reset the game
+         allEnemies.forEach(function(enemy){
+             var enemyX = enemy.x;
+             var enemyY = enemy.y;
+             if(playerY >= enemyY - 20 && playerY <= enemyY + 20){
+                 if(playerX >= enemyX - 20 && playerX <= enemyX + 20){
+                     this.reset();
+                     console.log("hit");
+                 }
+             }
+         });
+     }
+
+
     function update(dt) {
         updateEntities(dt);
         // checkCollisions();
     }
+
+
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -171,7 +192,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
 
